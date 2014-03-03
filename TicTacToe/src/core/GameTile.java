@@ -11,7 +11,7 @@ public class GameTile {
 	 * @author Ryan Zarmbinski
 	 *
 	 */
-	static enum GameTileConstant {
+	public static enum GameTileConstant {
 		BLANK, X, O;
 	}
 	

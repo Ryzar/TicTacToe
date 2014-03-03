@@ -31,7 +31,7 @@ public class GameView extends JFrame{
 		connected = false;
 		setVisible(connected);
 		setLayout(new BorderLayout());
-		gamePanel = new GamePanel(getClass().getResource("background.jpg"));
+		gamePanel = new GamePanel(getClass().getResource("background.jpg"), 615, 615);
 		
 		alertPanel = new AlertPanel();
 		add(alertPanel, BorderLayout.SOUTH);
