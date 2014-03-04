@@ -26,16 +26,20 @@ public class GameView extends JFrame{
 	 * Initialize all elements of the main window and panels, invisible to start with,
 	 * become visible when two players are connected
 	 */
-	public GameView() {
+	public GameView(GameModel model) {
 		super("TicTacToe");
-		connected = false;
+		connected = true;
 		setVisible(connected);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setSize(615, 615);
 		setLayout(new BorderLayout());
-		gamePanel = new GamePanel(getClass().getResource("background.jpg"), 615, 615);
+		gamePanel = new GamePanel(getClass().getResource("background.jpg"), 615, 615, model.getBoard());
 		
 		alertPanel = new AlertPanel();
 		add(alertPanel, BorderLayout.SOUTH);
 		
+		alertPanel.setText("ERROR: network unplugged");
+		alertPanel.setVisible(true);
 	}
 	/**
 	 * 

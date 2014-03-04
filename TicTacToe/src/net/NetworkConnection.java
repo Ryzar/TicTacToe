@@ -2,7 +2,7 @@ package net;
 
 /**
  * 
- * @author Zarmbinski
+ * @author Ryan Zarmbinski
  *
  */
 public class NetworkConnection {

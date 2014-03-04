@@ -1,7 +1,7 @@
 package core;
 
 /**
- * 
+ * Representation of an Illegal move
  * @author Ryan Zarmbinski
  *
  */

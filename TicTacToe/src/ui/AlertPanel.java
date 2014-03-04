@@ -7,7 +7,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
- * 
+ * Representation of the alert box at the bottom of the window. This box will be used to
+ * alert the user of the current state of the network connection, an illegal move, or if
+ * it is simply the other player's turn.
  * @author Ryan Zarmbinski
  *
  */
@@ -16,34 +18,28 @@ public class AlertPanel extends JPanel{
 	private boolean visible;
 	
 	/**
-	 * 
+	 * Creates a new, blank, invisible alert panel
 	 */
 	public AlertPanel() {
 		super();
 		this.setBackground(Color.RED);
 		text = new JLabel("");
-		visible = false;
+		setVisible(false);
 		add(text);
 	}
-	/**
-	 * 
-	 */
 	public void setVisible(boolean visibility) {
 		visible = visibility;
-		this.setVisible(visible);
+		super.setVisible(visibility);
 		this.update(getGraphics());
 	}
 	/**
-	 * 
-	 * @param text
+	 * Updates the text of this panel to reflect the new state that must be conveyed to the user
+	 * @param text message text to be displayed
 	 */
 	public void setText(String text) {
 		this.text.setText(text);
 		this.update(getGraphics());
 	}
-	/**
-	 * 
-	 */
 	public void update(Graphics g) {
 		paint(g);
 	}
