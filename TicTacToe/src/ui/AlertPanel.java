@@ -1,5 +1,6 @@
 package ui;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Graphics;
 
@@ -23,9 +24,11 @@ public class AlertPanel extends JPanel{
 	public AlertPanel() {
 		super();
 		this.setBackground(Color.RED);
+		this.setForeground(Color.WHITE);
+		this.setLayout(new BorderLayout());
 		text = new JLabel("");
 		setVisible(false);
-		add(text);
+		add(text, BorderLayout.WEST);
 	}
 	public void setVisible(boolean visibility) {
 		visible = visibility;
