@@ -32,10 +32,11 @@ public class GameController implements ActionListener, MouseListener{
 		if(e.getSource() instanceof GameTileView) {
 			GameTileView view = (GameTileView)e.getSource();
 			if(view.isActive()) {
-				GameTile tileModel = (GameTile)view.getGameTileModel();
+				System.out.println(view.getActionCommand());
+				/*GameTile tileModel = (GameTile)view.getGameTileModel();
 				tileModel.setValue(model.getActivePlayer().getRole());
 				view.updateContents();
-				model.getActivePlayer().queueMove(new Move(model.getActivePlayer(), tileModel.getLocation()));
+				model.getActivePlayer().queueMove(new Move(model.getActivePlayer(), tileModel.getLocation()));*/
 			}
 		}
 	}

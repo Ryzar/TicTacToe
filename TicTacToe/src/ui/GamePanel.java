@@ -1,12 +1,12 @@
 package ui;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.GridLayout;
-import java.net.URL;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
-import javax.swing.JLabel;
-import javax.swing.ImageIcon;
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 import core.GameBoard;
@@ -25,15 +25,15 @@ public class GamePanel extends JPanel{
 	 */
 	private GameBoard board;
 	private GameTileView[][] views;
-	public GamePanel(URL backgroundImageURL, int width, int height, GameBoard board) {
+	BufferedImage backgroundImage;
+	public GamePanel(int width, int height, GameBoard board){
 		super();
 		setSize(width, height);
-		setBackground(Color.WHITE);
-		setLayout(new GridLayout(3, 3, 10, 10));
-		JLabel background = null;
-		if(backgroundImageURL != null) {
-			background = new JLabel(new ImageIcon(backgroundImageURL));
-			add(background);
+		setLayout(new GridLayout(3, 3, 0, 0));
+		try{
+			backgroundImage = ImageIO.read(new File("background.jpg"));
+		}catch(IOException e){ 
+			backgroundImage = null;
 		}
 		
 		this.board = board;
@@ -44,5 +44,15 @@ public class GamePanel extends JPanel{
 				this.add(views[row][col]);
 			}
 		}
+		setVisible(true);
+	}
+	public void paint(Graphics g) {
+		// Create the background image from attached file
+		g.drawImage(backgroundImage, 0, 0, null);
+		/* Draw each of the four lines for the gameboard */
+		g.fillRect(215, 10, 20, 595);
+		g.fillRect(390, 10, 20, 595);
+		g.fillRect(10, 215, 595, 20);
+		g.fillRect(10, 390, 595, 20);
 	}
 }

@@ -14,9 +14,9 @@ import javax.swing.JPanel;
  * @author Ryan Zarmbinski
  *
  */
+@SuppressWarnings("serial")
 public class AlertPanel extends JPanel{
 	private JLabel text;
-	private boolean visible;
 	
 	/**
 	 * Creates a new, blank, invisible alert panel
@@ -27,13 +27,8 @@ public class AlertPanel extends JPanel{
 		this.setForeground(Color.WHITE);
 		this.setLayout(new BorderLayout());
 		text = new JLabel("");
-		setVisible(false);
 		add(text, BorderLayout.WEST);
-	}
-	public void setVisible(boolean visibility) {
-		visible = visibility;
-		super.setVisible(visibility);
-		this.update(getGraphics());
+		setVisible(false);
 	}
 	/**
 	 * Updates the text of this panel to reflect the new state that must be conveyed to the user
@@ -41,8 +36,12 @@ public class AlertPanel extends JPanel{
 	 */
 	public void setText(String text) {
 		this.text.setText(text);
+		if(!this.isVisible()) {
+			this.setVisible(true);
+		}
 		this.update(getGraphics());
 	}
+	
 	public void update(Graphics g) {
 		paint(g);
 	}

@@ -1,10 +1,13 @@
 package ui;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 
 import javax.swing.AbstractButton;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.border.Border;
 
 import core.GameController;
 import core.GameTile;
@@ -15,7 +18,7 @@ import core.GameTile;
  *
  */
 @SuppressWarnings("serial")
-public class GameTileView extends AbstractButton{
+public class GameTileView extends JButton{
 	private GameTile model;
 	private JLabel contents;
 	private final JLabel CONTENTS_X = new JLabel("X");//new JLabel(new ImageIcon(getClass().getResource("X32.png")));
@@ -31,6 +34,7 @@ public class GameTileView extends AbstractButton{
 		this.setSize(width, height);
 		this.model = model;
 		contents = CONTENTS_BLANK;
+		setText("gametile");
 		this.setLayout(new BorderLayout());
 		this.add(contents, BorderLayout.CENTER);
 		this.setVisible(true);
