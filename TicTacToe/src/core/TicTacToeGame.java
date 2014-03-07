@@ -14,7 +14,7 @@ import static core.GameTile.GameTileConstant;
  *
  */
 public class TicTacToeGame {
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException {
 		Player player1, player2;
 		GameModel model;
 		GameView view;
@@ -26,8 +26,16 @@ public class TicTacToeGame {
 		model = new GameModel(player1, player2);
 		view = new GameView(model);
 		controller = new GameController(model, view);
+		view.register(controller);
 		
 		//Thread gameThread = new Thread(model);
 		//gameThread.start();
+		
+		//The following demonstrated the AlertPanel feature
+		Thread.sleep(5000);
+		view.getAlertPanel().setVisible(false);
+		Thread.sleep(5000);
+		view.getAlertPanel().setText("Now Connecting...");
+		view.getAlertPanel().setVisible(true);
 	}
 }

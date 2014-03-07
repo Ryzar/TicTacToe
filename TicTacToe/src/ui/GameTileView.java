@@ -2,12 +2,15 @@ package ui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Cursor;
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
-import javax.swing.AbstractButton;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.border.Border;
+import javax.imageio.ImageIO;
+import javax.swing.JComponent;
+import javax.swing.JPanel;
 
 import core.GameController;
 import core.GameTile;
@@ -18,26 +21,31 @@ import core.GameTile;
  *
  */
 @SuppressWarnings("serial")
-public class GameTileView extends JButton{
+public class GameTileView extends JComponent{
 	private GameTile model;
-	private JLabel contents;
-	private final JLabel CONTENTS_X = new JLabel("X");//new JLabel(new ImageIcon(getClass().getResource("X32.png")));
-	private final JLabel CONTENTS_O = new JLabel("O");//new JLabel(new ImageIcon(getClass().getResource("O32.png")));
-	private final JLabel CONTENTS_BLANK = new JLabel();
 	private boolean active;
+	private BufferedImage IMAGE_X;
+	private BufferedImage IMAGE_O;
+	private JPanel myPanel;
 	/**
 	 * 
 	 * @param model corresponding GameTile
 	 */
-	public GameTileView(int width, int height, GameTile model) {
+	public GameTileView(GameTile model) {
 		super();
-		this.setSize(width, height);
+		IMAGE_O = null;
+		IMAGE_X = null;
+		try {
+			IMAGE_X = ImageIO.read(new File("X32.jpg"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		this.model = model;
-		contents = CONTENTS_BLANK;
-		setText("gametile");
 		this.setLayout(new BorderLayout());
-		this.add(contents, BorderLayout.CENTER);
 		this.setVisible(true);
+		myPanel = new JPanel();
+		this.add(myPanel, BorderLayout.CENTER);
 		active = true;
 	}
 	/**
@@ -45,7 +53,7 @@ public class GameTileView extends JButton{
 	 * @param controller central object containing all actionlisteners
 	 */
 	public void register(GameController controller) {
-		this.addActionListener(controller);
+		this.addMouseListener(controller);
 	}
 	public GameTile getGameTileModel() {
 		return model;
@@ -54,14 +62,24 @@ public class GameTileView extends JButton{
 	 * 
 	 */
 	public void updateContents() {
+		updateContents(myPanel.getGraphics());
+	}
+	
+	private void updateContents(Graphics g) {
 		switch(model.getValue()) {
-		case X: contents = CONTENTS_X;break;
-		case O: contents = CONTENTS_O;break;
-		case BLANK: contents = CONTENTS_BLANK;
+		case X: if(IMAGE_X != null)
+					g.drawImage(IMAGE_X, 0, 0, null);
+				break;
+		case O: if(IMAGE_O != null)
+					g.drawImage(IMAGE_O, 0, 0, null);
+		default: g.clearRect(0, 0, 1000, 1000);
 		}
-		if(contents == null) {
-			contents = new JLabel("ERROR: can't find resource");
-		}
+	}
+	public void paint(Graphics g) {
+		updateContents(g);
+	}
+	public void update(Graphics g) {
+		updateContents(g);
 	}
 	public boolean isActive() {
 		return active;

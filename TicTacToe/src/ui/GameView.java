@@ -2,7 +2,12 @@ package ui;
 
 import java.awt.BorderLayout;
 import java.awt.Graphics;
+import java.awt.MenuBar;
+import java.awt.MenuItem;
+
 import javax.swing.JFrame;
+
+import core.GameController;
 
 /**
  * 
@@ -44,11 +49,18 @@ public class GameView extends JFrame{
 	public AlertPanel getAlertPanel() {
 		return alertPanel;
 	}
+	public void update(Graphics g) {
+		gamePanel.repaint();
+	}
 	/**
 	 * 
-	 * @param g
 	 */
-	public void paint(Graphics g) {
-		
+	public void register(GameController controller) {
+		GameTileView[][] tileViews = gamePanel.getGameTileViews();
+		for(int x = 0; x < tileViews.length; x++) {
+			for(int y = 0; y < tileViews[x].length; y++) {
+				tileViews[x][y].addMouseListener(controller);
+			}
+		}
 	}
 }
